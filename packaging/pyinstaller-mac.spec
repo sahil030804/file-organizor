@@ -1,12 +1,12 @@
 # macOS .app bundle (CI wraps it into .dmg with create-dmg).
 # Paths relative to REPO ROOT:  pyinstaller packaging/pyinstaller-mac.spec
 a = Analysis(
-    ['src/__main__.py'],
+    ['../src/__main__.py'],
     binaries=[],
     datas=[
-        ('rules.yaml', '.'),
-        ('assets/arrow-down.svg', 'assets'),
-        ('assets/icon.svg', 'assets'),
+        ('../rules.yaml', '.'),
+        ('../assets/arrow-down.svg', 'assets'),
+        ('../assets/icon.svg', 'assets'),
     ],
     hiddenimports=['PySide6.QtSvg'],
     excludes=['pytest'],
@@ -22,6 +22,6 @@ coll = COLLECT(exe, a.binaries, a.zipfiles, a.datas, name='FileOrganizer')
 app = BUNDLE(
     coll,
     name='FileOrganizer.app',
-    icon='assets/icon.icns',
+    icon='../assets/icon.icns',
     bundle_identifier='com.example.fileorganizer',
 )
