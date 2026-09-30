@@ -28,7 +28,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with: { name: FileOrganizer-macos, path: dist/*.dmg }
 
-  linux:
+  linux-deb:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,3 +36,25 @@ jobs:
       - run: bash packaging/build-deb.sh
       - uses: actions/upload-artifact@v4
         with: { name: FileOrganizer-deb, path: dist/*.deb }
+
+  linux-rpm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y rpm
+      - run: bash packaging/build-generic-rpm.sh
+      - uses: actions/upload-artifact@v4
+        with: { name: FileOrganizer-rpm, path: dist/*.rpm }
+
+  publish:
+    needs: [windows-exe, macos-dmg, linux-deb, linux-rpm]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { path: artifacts, merge-multiple: true }
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/*
+          generate_release_notes: true
