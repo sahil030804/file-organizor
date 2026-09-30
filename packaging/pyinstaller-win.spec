@@ -16,5 +16,5 @@ exe = EXE(
     pyz, a.scripts, a.binaries, a.zipfiles, a.datas, [],
     name='FileOrganizer',
     console=False,  # windowed app, no terminal
-    icon='assets/icon.svg',
+    icon='assets/icon.ico',
 )

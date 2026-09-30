@@ -22,6 +22,6 @@ coll = COLLECT(exe, a.binaries, a.zipfiles, a.datas, name='FileOrganizer')
 app = BUNDLE(
     coll,
     name='FileOrganizer.app',
-    icon='assets/icon.svg',
+    icon='assets/icon.icns',
     bundle_identifier='com.example.fileorganizer',
 )
