@@ -1,0 +1,38 @@
+name: release
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  windows-exe:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install PySide6 PyYAML pyinstaller
+      - run: pyinstaller packaging/pyinstaller-win.spec
+      - uses: actions/upload-artifact@v4
+        with: { name: FileOrganizer-windows, path: dist/FileOrganizer.exe }
+
+  macos-dmg:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install PySide6 PyYAML pyinstaller
+      - run: pyinstaller packaging/pyinstaller-mac.spec
+      - run: brew install create-dmg
+      - run: create-dmg --window-size 500 300 --app-drop-link 375 100 dist/FileOrganizer.dmg dist/FileOrganizer.app
+      - uses: actions/upload-artifact@v4
+        with: { name: FileOrganizer-macos, path: dist/*.dmg }
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y python3-pyside6 python3-yaml
+      - run: bash packaging/build-deb.sh
+      - uses: actions/upload-artifact@v4
+        with: { name: FileOrganizer-deb, path: dist/*.deb }

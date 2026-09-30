@@ -1,0 +1,8 @@
+#!/usr/bin/python3
+"""System launcher for File Organizer (.deb install). Uses distro Python + system PySide6."""
+import sys
+sys.path.insert(0, "/usr/share/fileorganizer")
+from src.gui import main
+
+if __name__ == "__main__":
+    main()

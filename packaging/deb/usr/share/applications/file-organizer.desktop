@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=File Organizer
+Comment=Organize Downloads/Desktop in-place with approve + undo
+Exec=/usr/bin/file-organizer
+Icon=file-organizer
+Terminal=false
+Type=Application
+Categories=Utility;FileTools;
+StartupWMClass=file-organizer
