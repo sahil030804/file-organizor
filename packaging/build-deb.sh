@@ -20,7 +20,7 @@ echo "Installed-Size: $(du -sk "$ROOT/packaging/deb/usr" | cut -f1)" >> "$ROOT/p
 rm -rf /tmp/opencode/debbuild && mkdir -p /tmp/opencode/debbuild
 tar -czf /tmp/opencode/debbuild/control.tar.gz -C "$ROOT/packaging/deb/DEBIAN" control postinst prerm
 tar -czf /tmp/opencode/debbuild/data.tar.gz -C "$ROOT/packaging/deb" usr
-echo -n "2.0" > /tmp/opencode/debbuild/debian-binary
+printf '2.0\n' > /tmp/opencode/debbuild/debian-binary
 mkdir -p "$ROOT/dist"
 ar rcs "$ROOT/dist/file-organizer_1.0.0_all.deb" \
   /tmp/opencode/debbuild/debian-binary \
