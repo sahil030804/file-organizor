@@ -1,0 +1,18 @@
+#!/bin/sh
+# Runs on install/upgrade: create isolated venv + deps on the TARGET machine.
+# This keeps the .deb small and version-independent (Ubuntu has no system PySide6).
+set -e
+APP=/usr/share/fileorganizer
+VENV=$APP/venv
+if [ ! -x "$VENV/bin/python" ]; then
+  python3 -m venv "$VENV"
+  "$VENV/bin/pip" install --upgrade pip
+  "$VENV/bin/pip" install -r "$APP/requirements.txt"
+fi
+if command -v update-desktop-database >/dev/null 2>&1; then
+  update-desktop-database /usr/share/applications || true
+fi
+if command -v gtk-update-icon-cache >/dev/null 2>&1; then
+  gtk-update-icon-cache -f -t /usr/share/icons/hicolor || true
+fi
+exit 0

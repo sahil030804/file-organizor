@@ -5,7 +5,7 @@ In-place organizer: scans loose files, proposes `Category/` folders, you approve
 ## Run
 ```
 cd file-organizer
-python3 -m pip install pyyaml PySide6 pytest
+python3 -m pip install -r requirements-dev.txt
 python3 -m pytest -q
 python3 -m src.gui
 ```

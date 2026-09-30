@@ -32,8 +32,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update && sudo apt-get install -y python3-pyside6 python3-yaml
       - run: bash packaging/build-deb.sh
+      - run: sudo apt-get update && sudo apt-get install -y ./dist/*.deb
+      - run: desktop-file-validate /usr/share/applications/file-organizer.desktop
+      - name: launch smoke test (124 = GUI stayed open, good)
+        run: |
+          code=0
+          QT_QPA_PLATFORM=offscreen timeout 20 /usr/bin/file-organizer || code=$?
+          test "$code" -eq 124
       - uses: actions/upload-artifact@v4
         with: { name: FileOrganizer-deb, path: dist/*.deb }
 

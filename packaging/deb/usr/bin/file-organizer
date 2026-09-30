@@ -1,8 +1,5 @@
-#!/usr/bin/python3
-"""System launcher for File Organizer (.deb install). Uses distro Python + system PySide6."""
-import sys
-sys.path.insert(0, "/usr/share/fileorganizer")
-from src.gui import main
-
-if __name__ == "__main__":
-    main()
+#!/usr/bin/env bash
+# System launcher for File Organizer (.deb install).
+# Venv is created on the target machine by DEBIAN/postinst.
+cd /usr/share/fileorganizer
+exec ./venv/bin/python -m src "$@"

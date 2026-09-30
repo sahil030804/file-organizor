@@ -1,0 +1,7 @@
+#!/bin/sh
+# Runs on remove/purge: drop the venv we created (user data untouched).
+set -e
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+  rm -rf /usr/share/fileorganizer/venv
+fi
+exit 0

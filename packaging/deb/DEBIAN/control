@@ -3,11 +3,11 @@ Version: 1.0.0
 Section: utils
 Priority: optional
 Architecture: all
-Depends: python3, python3-pyside6 (>= 6.4), python3-yaml
+Depends: python3, python3-venv, python3-pip
 Maintainer: File Organizer <you@example.com>
 Description: Organize files in-place with approve + undo
  Scan Downloads/Desktop, get category proposals
  (Documents/Markdown, Images/Photos, …), approve moves,
  and undo any batch. Safe by design: preview first,
  never overwrites, ignores subfolders.
-Installed-Size: 104
+Installed-Size: 108
